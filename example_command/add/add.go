@@ -1,3 +1,4 @@
+// example add program by my wife Kanokon Chansom https://github.com/ihippoi
 package main
 
 import "fmt"
