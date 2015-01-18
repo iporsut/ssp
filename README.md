@@ -33,3 +33,19 @@ http://localhost:8080/add?in=10 20
 หรือถ้าเป็น POST จะใช้ request body ก็ได้
 
 ถ้าต้องการเปลี่ยน port หรือ ip ของ host ให้ใช้ option --port และ --host
+
+อีกตัวอย่างใช้กับคำสั่ง  sort ของ  shell
+
+ssp --cmd="sort" --path="/sort"
+
+ลองใช้ curl ยิง request ไปดังนี้
+
+curl -X POST --data-binary @- http://127.0.0.1:8080/sort <<EOF
+Weerasak
+Kanokon
+EOF
+
+ได้ผลลัพธ์ออกมาดังนี้
+
+Kanokon
+Weerasak
