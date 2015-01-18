@@ -39,13 +39,15 @@ http://localhost:8080/add?in=10 20
 ssp --cmd="sort" --path="/sort"
 
 ลองใช้ curl ยิง request ไปดังนี้
-
+```shel
 curl -X POST --data-binary @- http://127.0.0.1:8080/sort <<EOF
 Weerasak
 Kanokon
 EOF
+```
 
 ได้ผลลัพธ์ออกมาดังนี้
-
+```shell
 Kanokon
 Weerasak
+```
