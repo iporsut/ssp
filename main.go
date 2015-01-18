@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"log"
 	"net"
 	"net/http"
@@ -146,10 +147,16 @@ func serverHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		in := r.FormValue("in")
 		fmt.Fprintln(stdin, in)
-		stdin.Close()
 	} else if r.Method == "POST" {
-		defer r.Body.Close()
-		go io.Copy(stdin, r.Body)
+		buf, err := ioutil.ReadAll(r.Body)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		r.Body.Close()
+		fmt.Fprintln(stdin, string(buf))
 	}
+	stdin.Close()
 	io.Copy(w, stdout)
+	stdout.Close()
 }
